@@ -1,5 +1,8 @@
 def minimax(state,max_depth,maximize):
-	if (max_depth==0) or (state.get_children()==[]):
+	dictionnaire={}
+	if state in dictionnaire:
+		return(dictionnaire[state])
+	if (max_depth==0) or (state.get_children()==[]) or 
 		return(state.evaluate())
 	else :
 		L = state.get_children()
@@ -9,5 +12,7 @@ def minimax(state,max_depth,maximize):
 			Scores.append(score)
 		if (maximize == True):
 			return(max(Scores))
+			dictionnaire[state] = max(Scores)
 		else :
 			return(min(Scores))
+			dictionnaire[state] = min(State)
