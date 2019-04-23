@@ -2,30 +2,29 @@ import time
 
 def minimax_time(state,T,maximize):
 	dictionnaire = {}
-
-	if T <= 2.5e-5 :
-		return(state.evaluate())
 	if state in dictionnaire:
 		return(dictionnaire[state])
-	if (max_depth==0) or (state.get_children()==[]):
+	if (T <= 5e-5) :
 		return(state.evaluate())
-
+	L = state.get_children()
+	if (L==[]):
+		return(state.evaluate())
 	else :
-		L = state.get_children()
 		Scores = []
 		Tdispo = T
+		Temps = []
 		compt_enfants = 0
+		debut = time.time()
 		for enfant in L :
-			debut = time.time()
-			score = minimax(enfant,Tdispo/(len(L)-compt_enfants),not(maximize))
+			score = minimax_time(enfant,Tdispo/(len(L)-compt_enfants),not(maximize))
 			fin = time.time()
 			Treel= fin - debut
-			Tdispo = Tdispo-Treel
-			
+			Tdispo = T-Treel
 			Scores.append(score)
+			Temps.append(Tdispo)
 			compt_enfants = compt_enfants + 1
 
-
+		#print(Temps)	
 		if (maximize == True) :
 			return(max(Scores))
 			dictionnaire[state] = max(Scores)
