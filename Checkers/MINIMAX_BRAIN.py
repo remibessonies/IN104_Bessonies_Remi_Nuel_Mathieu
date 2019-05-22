@@ -15,12 +15,12 @@ class MinimaxBrain:
     def play(self, gameState, timeLimit):
 
         nextStates=gameState.findNextStates()
-        max = minimax(nextStates[0],self.time,-21,21,True,simu.GameState.findNextStates,evaluate)
+        max = minimax(nextStates[0],timeLimit/10,-21,21,True,simu.GameState.findNextStates,evaluate)
         i=0
         rangMax=0
         for state in nextStates :
-            if minimax(state,self.time,-21,21,True,simu.GameState.findNextStates,evaluate) > max :
-                max = minimax(state,self.time,-21,21,True,simu.GameState.findNextStates,evaluate)
+            if minimax(state,timeLimit/10,-21,21,True,simu.GameState.findNextStates,evaluate) > max :
+                max = minimax(state,timeLimit/10,-21,21,True,simu.GameState.findNextStates,evaluate)
                 rangMax=i
             i+=1
         return(nextStates[rangMax])
